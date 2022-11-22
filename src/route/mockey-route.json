@@ -1,0 +1,5 @@
+{
+  "404": "404.json",
+  "TEST": "/test/test.json",
+  "ANOTHER_TEST": "/test/anotherTest.json"
+}

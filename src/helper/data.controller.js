@@ -11,13 +11,20 @@ const extractJsonData = function (basePathToData, filename) {
     return JSON.parse(fs.readFileSync(fullFilename, 'utf-8'));
 };
 
-exports.responseData = function (url, request, response) {
-    const basePathToRoute = path.join(baseDir, 'route', 'mock-route.json');
+exports.responseData = function (routeKey, request, response) {
+    const basePathToRoute = path.join(baseDir, 'route', 'mockey-route.json');
     let routes = JSON.parse(fs.readFileSync(basePathToRoute, "utf8"));
-    const data = extractJsonData(basePathToData, routes[url]);
+
+    const basePathToConfig = path.join(baseDir, 'config', 'mockey-config.json');
+    let appConfig = JSON.parse(fs.readFileSync(basePathToConfig, "utf8"));
+
+    if(!routes[routeKey]) {
+        routeKey = "404"
+    }
+    const data = extractJsonData(basePathToData, routes[routeKey]);
     setTimeout(function() {
         return response.send(data);
-    }, 100);
+    }, appConfig['responseDelayInMillis']);
 };
 
 exports.setupBaseDir = function(inputBaseDir) {

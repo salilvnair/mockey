@@ -1,0 +1,23 @@
+{
+  "transactionId": "ee6b6f8228cb4164545d6",
+  "timestamp": "Thu Jun 10 17:56:07 IST 2021",
+  "data": {
+    "SEARCH_RESULT": {
+      "metadata": {
+        "userId": "another_user"
+      },
+      "paginatedData": {
+        "fromRow": -1,
+        "toRow": -1,
+        "totalRows": 0,
+        "previousPage": -1,
+        "currentPage": 1,
+        "nextPage": -1,
+        "totalPages": 1,
+        "pageSize": 100,
+        "results": [],
+        "hasMoreResults": false
+      }
+    }
+  }
+}
