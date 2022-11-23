@@ -1,6 +1,7 @@
 {
   "transactionId": "ee6b6f8228cb4164545d6",
   "timestamp": "Thu Jun 10 17:56:07 IST 2021",
+  "responseDelayInMillis": 3000,
   "data": {
     "SEARCH_RESULT": {
       "metadata": {

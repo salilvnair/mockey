@@ -91,7 +91,7 @@ function registerCustomerDataResolver(resolver) {
 {
   "404": "404.json",
   "TEST": "/test/test.json",
-  "ANOTHER_TEST": "/test/anotherTest.json"
+  "ANOTHER_TEST": "/test/anotherTest.json",
   "CUSTOMER_DATA_SCENARIO_1": "src/response/customer/customerData.json"
 }
 
@@ -101,9 +101,11 @@ function registerCustomerDataResolver(resolver) {
 
 
 
-## Note:
+## Mocking the delay in response:
 
-> We can also configure the response delay in `mockey-config.json` at [`src/config/mockey-config.json`](src/config/mockey-config.json) default value is 5000 millis (5 seconds)
+### Option 1:  mockey-config.json
+
+> We can mock the response delay in `mockey-config.json` at [`src/config/mockey-config.json`](src/config/mockey-config.json) default value is 5000 millis (5 seconds)
 
 ```json
 {
@@ -111,3 +113,16 @@ function registerCustomerDataResolver(resolver) {
   "responseDelayInMillis" : 5000
 }
 ```
+### Option 2:  add "responseDelayInMillis" property in the response
+
+> For a response to have different delay other than config we can configure it using  "responseDelayInMillis" in the response body.
+
+> see below example of customerData.json
+```json 
+{
+  "responseDelayInMillis": 3000,
+  "data": {}
+}
+```
+
+> refer `anotherTest.json` at [`src/response/test/anotherTest.json`](src/response/test/anotherTest.json) for the complete response.
