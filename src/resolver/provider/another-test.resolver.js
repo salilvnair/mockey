@@ -1,5 +1,5 @@
-const {JsonPathUtil} = require("../../util/jsonpath.util");
-const {JsonPathBuilder} = require("../../util/jsonpath.util");
+const {JsonPathUtil} = require("../../lib/helper/jsonpath.util");
+const {JsonPathBuilder} = require("../../lib/helper/jsonpath.util");
 
 exports.AnotherTestResolver = function () {
     return {

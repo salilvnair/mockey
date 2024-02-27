@@ -1,5 +1,6 @@
 {
   "404": "404.json",
   "TEST": "/test/test.json",
-  "ANOTHER_TEST": "/test/anotherTest.json"
+  "ANOTHER_TEST": "/test/anotherTest.json",
+  "PING_PONG": "/test/pingPong.txt"
 }

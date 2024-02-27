@@ -6,11 +6,6 @@ let baseDir;
 let basePathToData;
 
 
-const extractJsonData = function (basePathToData, filename) {
-    const fullFilename = path.join(basePathToData, filename);
-    return JSON.parse(fs.readFileSync(fullFilename, 'utf-8'));
-};
-
 const overrideResponseDelayIfAvailable = function (data, responseDelayInMillis) {
     if(data['responseDelayInMillis']) {
         let responseDelayInMillisFromData = data['responseDelayInMillis'];
@@ -23,11 +18,23 @@ const overrideResponseDelayIfAvailable = function (data, responseDelayInMillis) 
             }
             catch (e) {}
         }
+        delete data['responseDelayInMillis'];
     }
     return responseDelayInMillis;
 }
 
-exports.responseData = function (routeKey, request, response) {
+
+const extractData = function (basePathToData, filename, resolver) {
+    const fullFilename = path.join(basePathToData, filename);
+    if(resolver.type && resolver.type === 'string') {
+        return fs.readFileSync(fullFilename, 'utf-8');
+    }
+    else {
+        return JSON.parse(fs.readFileSync(fullFilename, 'utf-8'));
+    }
+};
+
+exports.responseData = function (routeKey, request, response, resolver) {
     const basePathToRoute = path.join(baseDir, 'route', 'mockey-route.json');
     let routes = JSON.parse(fs.readFileSync(basePathToRoute, "utf8"));
 
@@ -40,7 +47,11 @@ exports.responseData = function (routeKey, request, response) {
 
     let responseDelayInMillis = appConfig['responseDelayInMillis'];
 
-    const data = extractJsonData(basePathToData, routes[routeKey]);
+    let data = extractData(basePathToData, routes[routeKey], resolver);
+
+    if(resolver && resolver.process) {
+        resolver.process(data, request, response);
+    }
 
     responseDelayInMillis = overrideResponseDelayIfAvailable(data, responseDelayInMillis);
 

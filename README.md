@@ -21,7 +21,7 @@
 }
 ```
 
-> Create a new javascript file `anyname_of_your_choice.resolver.js` in [`src/resolver/user-defined`](src/resolver/user-defined) folder 
+> Create a new javascript file `anyname_of_your_choice.resolver.js` in [`src/resolver/provider`](src/resolver/provider) folder 
 
 > Implement a `resolve` function like below , you can also use the `JsonPathBuilder` and `JsonPathUtil` to condtionally check the request and based on that either return a `routeKey` or `null`
 
@@ -47,16 +47,44 @@ exports.CustomerDataResolver = function () {
 }
 ```
 
+> Optionally a `process` function like below where you can modify data based on some conditions or checks.
+
+```javascript
+const { uuidv4 } = requires("../../lib/helper/uuid.helper")
+
+exports.CustomerDataResolver = function () {
+    return {
+        // omitted for the better readability
+        process: function (data, request, response) {
+            data.transactionId = uuidv4();
+        }
+    }
+}
+```
+
+> Optionally a `type` function in case the return type is `string`, defualt type is `json`.
+
+```javascript
+const { uuidv4 } = requires("../../lib/helper/uuid.helper")
+
+exports.CustomerDataResolver = function () {
+    return {
+        // omitted for the better readability
+        type: 'string'
+    }
+}
+```
+
 ### Step 3 : Register the user defined request resolver
 
 > Register the resolver in `resolver.registry.js` created in `Step 1` at [`src/resolver/core/resolver.registry.js`](src/resolver/core/resolver.registry.js) along with the HttpMethod i.e. either `'POST'` or `'GET'`
 
 ```javascript
-const {RequestResolver} = require("./request.resolver");
+const {RequestResolver} = require("../../lib/resolver/request.resolver");
 
 // omitted for the better readability
  
-const {CustomerDataResolver} = require("../user-defined/customerData.resolver");
+const {CustomerDataResolver} = require("../provider/customerData.resolver");
 
 exports.init = function () {
     let resolver = new RequestResolver();
@@ -85,14 +113,14 @@ function registerCustomerDataResolver(resolver) {
 
 ### Step 4 : Register the mockey route
 
-> Whatever the return value we have given for the resolver's resolve in our case `CUSTOMER_DATA_SCENARIO_1` in `Step 1` we need to map that value in `mockey-route.json` at [`src/route/mockey-route.json`](src/route/mockey-route.json) with key as the returned string `CUSTOMER_DATA_SCENARIO_1` and value as the path where the mocked response resides for example `src/response/customerData.json` 
+> Whatever the return value we have given for the resolver's resolve in our case `CUSTOMER_DATA_SCENARIO_1` in `Step 1` we need to map that value in `mockey-route.json` at [`src/route/mockey-route.json`](src/route/mockey-route.json) with key as the returned string `CUSTOMER_DATA_SCENARIO_1` and value as the path where the mocked response resides for example `src/response/customerData/customerData.json` 
 
 ```json
 {
   "404": "404.json",
   "TEST": "/test/test.json",
   "ANOTHER_TEST": "/test/anotherTest.json",
-  "CUSTOMER_DATA_SCENARIO_1": "src/response/customer/customerData.json"
+  "CUSTOMER_DATA_SCENARIO_1": "/customer/customerData.json"
 }
 
 ```

@@ -24,9 +24,10 @@ function initRequestResolvers(app, resolver) {
 }
 
 function extractResponse(resolvers, req, resp) {
+    let resolver;
     let resolvedDataPath;
     for (let i = 0; i < resolvers.length; i++) {
-        let resolver = resolvers[i];
+        resolver = resolvers[i];
         resolvedDataPath = resolver.resolve(req);
         if(resolvedDataPath) {
             break;
@@ -35,7 +36,7 @@ function extractResponse(resolvers, req, resp) {
     if(!resolvedDataPath) {
         resolvedDataPath = "404"
     }
-    return dataController.responseData(resolvedDataPath, req, resp);
+    return dataController.responseData(resolvedDataPath, req, resp, resolver);
 }
 
 

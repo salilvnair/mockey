@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const apiController = require('./api/api.controller');
+const apiController = require('./lib/api/api.controller');
 const resolverRegistry = require('./resolver/core/resolver.registry');
 
 
