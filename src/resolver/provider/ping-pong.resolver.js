@@ -3,6 +3,9 @@ exports.PingPongResolver = function () {
         resolve: function (request, response) {
             return 'PING_PONG';
         },
-        type: 'string'
+        responseType: 'string',
+        responseHeaders: {
+            "X-custom-header-test": "Blablabla"
+        }
     }
 }

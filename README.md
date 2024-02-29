@@ -62,7 +62,7 @@ exports.CustomerDataResolver = function () {
 }
 ```
 
-> Optionally a `type` function in case the return type is `string`, defualt type is `json`.
+> Optionally a `responseType` in case the return type is `string`, defualt type is `json` 😏.
 
 ```javascript
 const { uuidv4 } = requires("../../lib/helper/uuid.helper")
@@ -70,12 +70,27 @@ const { uuidv4 } = requires("../../lib/helper/uuid.helper")
 exports.CustomerDataResolver = function () {
     return {
         // omitted for the better readability
-        type: 'string'
+        responseType: 'string'
     }
 }
 ```
 
-### Step 3 : Register the user defined request resolver
+> Optionally a `responseHeaders` in case if you want to send some weird headers for fun 😜.
+
+```javascript
+const { uuidv4 } = requires("../../lib/helper/uuid.helper")
+
+exports.CustomerDataResolver = function () {
+    return {
+        // omitted for the better readability
+        responseHeaders: {
+            "X-custom-header-test": "Blablabla"
+        }
+    }
+}
+```
+
+### Step 2 : Register the user defined request resolver
 
 > Register the resolver in `resolver.registry.js` created in `Step 1` at [`src/resolver/core/resolver.registry.js`](src/resolver/core/resolver.registry.js) along with the HttpMethod i.e. either `'POST'` or `'GET'`
 
@@ -111,7 +126,7 @@ function registerCustomerDataResolver(resolver) {
 
 ```
 
-### Step 4 : Register the mockey route
+### Step 3 : Register the mockey route and add the mocked response
 
 > Whatever the return value we have given for the resolver's resolve in our case `CUSTOMER_DATA_SCENARIO_1` in `Step 1` we need to map that value in `mockey-route.json` at [`src/route/mockey-route.json`](src/route/mockey-route.json) with key as the returned string `CUSTOMER_DATA_SCENARIO_1` and value as the path where the mocked response resides for example `src/response/customerData/customerData.json` 
 

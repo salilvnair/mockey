@@ -26,7 +26,7 @@ const overrideResponseDelayIfAvailable = function (data, responseDelayInMillis) 
 
 const extractData = function (basePathToData, filename, resolver) {
     const fullFilename = path.join(basePathToData, filename);
-    if(resolver.type && resolver.type === 'string') {
+    if(resolver.responseType && resolver.responseType === 'string') {
         return fs.readFileSync(fullFilename, 'utf-8');
     }
     else {
@@ -56,6 +56,11 @@ exports.responseData = function (routeKey, request, response, resolver) {
     responseDelayInMillis = overrideResponseDelayIfAvailable(data, responseDelayInMillis);
 
     setTimeout(function() {
+        if(resolver.responseHeaders) {
+            for(var key in resolver.responseHeaders) {
+                response.set(key, resolver.responseHeaders[key])
+            }
+        }
         return response.send(data);
     }, responseDelayInMillis);
 };
