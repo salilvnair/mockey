@@ -25,18 +25,18 @@ function initRequestResolvers(app, resolver) {
 
 function extractResponse(resolvers, req, resp) {
     let resolver;
-    let resolvedDataPath;
+    let resolvedData;
     for (let i = 0; i < resolvers.length; i++) {
         resolver = resolvers[i];
-        resolvedDataPath = resolver.resolve(req);
-        if(resolvedDataPath) {
+        resolvedData = resolver.resolve(req, resp);
+        if(resolvedData) {
             break;
         }
     }
-    if(!resolvedDataPath) {
-        resolvedDataPath = "404"
+    if(!resolvedData) {
+        resolvedData = "404"
     }
-    return dataController.responseData(resolvedDataPath, req, resp, resolver);
+    return dataController.responseData(resolvedData, req, resp, resolver);
 }
 
 

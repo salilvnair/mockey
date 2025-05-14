@@ -5,11 +5,11 @@ const apiController = require('./lib/api/api.controller');
 const resolverRegistry = require('./resolver/core/resolver.registry');
 
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.json());
 global.__basedir = __dirname;
 
-const port = 8888;
+const port = 31333;
 let resolver = resolverRegistry.init();
 apiController.init(app, __basedir, resolver);
 

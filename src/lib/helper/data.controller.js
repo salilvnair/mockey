@@ -34,23 +34,44 @@ const extractData = function (basePathToData, filename, resolver) {
     }
 };
 
-exports.responseData = function (routeKey, request, response, resolver) {
+const processMockeySendFile = function (resolvedData, request, response, resolver) {
+    return path.join(baseDir, resolvedData);
+}
+
+const processMockeyRedirect = function (resolvedData, request, response, resolver) {
+    return resolvedData;
+}
+
+const processMockeyResponse = function (resolvedData, request, response, resolver) {
     const basePathToRoute = path.join(baseDir, 'route', 'mockey-route.json');
     let routes = JSON.parse(fs.readFileSync(basePathToRoute, "utf8"));
 
-    const basePathToConfig = path.join(baseDir, 'config', 'mockey-config.json');
-    let appConfig = JSON.parse(fs.readFileSync(basePathToConfig, "utf8"));
-
-    if(!routes[routeKey]) {
-        routeKey = "404"
+    if(!routes[resolvedData]) {
+        resolvedData = "404"
     }
-
-    let responseDelayInMillis = appConfig['responseDelayInMillis'];
-
-    let data = extractData(basePathToData, routes[routeKey], resolver);
+    let data = extractData(basePathToData, routes[resolvedData], resolver);
 
     if(resolver && resolver.process) {
         resolver.process(data, request, response);
+    }
+
+    return data;
+}
+
+exports.responseData = function (resolvedData, request, response, resolver) {
+    const basePathToConfig = path.join(baseDir, 'config', 'mockey-config.json');
+    let appConfig = JSON.parse(fs.readFileSync(basePathToConfig, "utf8"));
+    let responseDelayInMillis = appConfig['responseDelayInMillis'];
+
+    let data;
+    if(resolver && resolver.sendFile) {
+        data = processMockeySendFile(resolvedData, request, response, resolver);
+    }
+    else if(resolver && resolver.redirect) {
+        data = processMockeyRedirect(resolvedData, request, response, resolver);
+    }
+    else {
+        data = processMockeyResponse(resolvedData, request, response, resolver);
     }
 
     responseDelayInMillis = overrideResponseDelayIfAvailable(data, responseDelayInMillis);
@@ -61,7 +82,17 @@ exports.responseData = function (routeKey, request, response, resolver) {
                 response.set(key, resolver.responseHeaders[key])
             }
         }
-        return response.send(data);
+        if(resolver.redirect) {
+            let redirectUri = data
+            return response.status(301).redirect(redirectUri)
+        }
+        else if(resolver.sendFile) {
+            let filePath = data;
+            return response.sendFile(filePath);
+        }
+        else {
+            return response.send(data);
+        }
     }, responseDelayInMillis);
 };
 

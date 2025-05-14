@@ -1,0 +1,10 @@
+{
+    "id_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzYWxpbHZuYWlyIiwibmFtZSI6IlNhbGlsIFVzZXIiLCJpYXQiOjE3MTU1MDAwMDAsImV4cCI6MTc0NzA5MjAwMH0.c2FsaWwtdG9rZW4tc2lnbmF0dXJlLW1vY2s",
+    "access_token": "abc123-access",
+    "refresh_token": "xyz789-refresh",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "error": null,
+    "error_description": null
+  }
+  

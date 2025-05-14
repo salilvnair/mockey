@@ -1,4 +1,4 @@
 {
   "name" : "App Name",
-  "responseDelayInMillis" : 5000
+  "responseDelayInMillis" : 1000
 }
