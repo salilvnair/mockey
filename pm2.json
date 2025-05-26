@@ -1,0 +1,9 @@
+{
+    "apps": [{
+      "name": "mockey-server",
+      "script": "./src/main.js",
+      "env": {
+        "production": true
+      }
+    }]
+  }

@@ -1,5 +1,5 @@
 const path = require('path');
-
+const { generateIdToken } = require("../../lib/helper/token.util")
 // exports.AuthLoginResolver = function () {
 //     return {
 //         resolve: function (request, response) {
@@ -22,7 +22,8 @@ exports.AuthLoginResolver = function () {
             let redirectUri = request.query.redirect_uri;
             console.log('redirectUri: ' + request.query.redirect_uri);
             let state = request.query.state;
-            redirectUri = redirectUri+'?state=' + state + '&code=mock.333.444.555.XXX.YYY.ZZZ';
+            const userId = request.headers['login_username'];
+            redirectUri = redirectUri+'?state=' + state + '&code='+userId;
             data.redirectToSourceUrl = redirectUri;
         },
     }
@@ -42,9 +43,14 @@ exports.AuthTokenResolver = function () {
         resolve: function (request, response) {
             return 'AUTHENTICATE';
         },
-        // process: function (data, request, response) {
-        //     data.idToken = uuidv4();
-        // },
+        process: function (data, request, response) {
+            const secret = 'mockey';
+            const userId = request.body.code
+            const idToken = generateIdToken(userId, secret);
+            console.log('Generated idToken:', idToken);
+            console.log('Generated userId:', userId);
+            data.id_token = idToken;
+        },
         responseHeaders: {
             "X-custom-header-test": "Blablabla"
         }
