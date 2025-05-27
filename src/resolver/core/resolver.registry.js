@@ -2,7 +2,7 @@ const {AnotherTestResolver} = require("../provider/another-test.resolver");
 const {RequestResolver} = require("../../lib/resolver/request.resolver");
 const {TestResolver} = require("../provider/test.resolver");
 const { PingPongResolver } = require("../provider/ping-pong.resolver");
-const { AuthLoginResolver, AuthTokenResolver, AuthLoginPageResolver } = require("../provider/auth-token.resolver");
+const { AuthLoginResolver, AuthTokenResolver, AuthLoginPageResolver, AuthJwkValidator } = require("../provider/auth-token.resolver");
 
 
 exports.init = function () {
@@ -33,7 +33,9 @@ function registerAuthTokenResolver(resolver) {
     let loginResolver = new AuthLoginResolver();
     let loginPageResolver = new AuthLoginPageResolver();
     let authTokenResolver = new AuthTokenResolver();
+    let authJwkValidator = new AuthJwkValidator();
     resolver.register('GET', '/login', loginPageResolver);
     resolver.register('GET', '/redirectToSource', loginResolver);
     resolver.register('POST', '/authenticate', authTokenResolver);
+    resolver.register('GET', '/jwks', authJwkValidator);
 }

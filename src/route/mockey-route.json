@@ -4,5 +4,6 @@
   "ANOTHER_TEST": "/test/anotherTest.json",
   "PING_PONG": "/test/pingPong.txt",
   "AUTHENTICATE": "/test/authenticate.json",
-  "REDIRECT_TO_SOURCE" : "/test/redirectToSource.json"
+  "REDIRECT_TO_SOURCE" : "/test/redirectToSource.json",
+  "AUTH_JWKS": "/jwk/mock-jwks.json"
 }
