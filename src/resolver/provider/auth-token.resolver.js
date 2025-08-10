@@ -43,6 +43,8 @@ exports.AuthTokenResolver = function () {
             const userId = request.body.code
             const idToken = generateIdToken(userId);
             console.log('Generated idToken:', idToken);
+            //print request headers
+            console.log('Request headers:', request.headers);
             console.log('Generated userId:', userId);
             data.id_token = idToken;
         },

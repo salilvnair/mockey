@@ -5,6 +5,7 @@
     "token_type": "Bearer",
     "expires_in": 3600,
     "error": null,
-    "error_description": null
+    "error_description": null,
+    "responseDelayInMillis": 20000
 }
   
