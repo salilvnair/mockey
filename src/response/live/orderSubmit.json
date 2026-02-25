@@ -1,0 +1,11 @@
+{
+  "status": "SUBMITTED",
+  "message": "Order submitted successfully",
+  "orderId": "ORD-PLACEHOLDER",
+  "customerId": "CUST-PLACEHOLDER",
+  "submittedByRole": "ADMIN",
+  "sourceCity": "Mumbai",
+  "targetCity": "Bengaluru",
+  "api3Status": "SUCCESS",
+  "api4AsyncStatus": null
+}

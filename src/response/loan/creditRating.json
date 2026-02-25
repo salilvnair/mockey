@@ -1,0 +1,7 @@
+{
+  "responseDelayInMillis": 900,
+  "customerId": "CUST-1001",
+  "creditRating": 782,
+  "ratingProvider": "CreditUnionMock",
+  "eligibleForFraudCheck": true
+}

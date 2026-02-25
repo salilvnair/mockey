@@ -4,6 +4,14 @@
   "ANOTHER_TEST": "/test/anotherTest.json",
   "PING_PONG": "/test/pingPong.txt",
   "AUTHENTICATE": "/test/authenticate.json",
-  "REDIRECT_TO_SOURCE" : "/test/redirectToSource.json",
-  "AUTH_JWKS": "/jwk/mock-jwks.json"
+  "REDIRECT_TO_SOURCE": "/test/redirectToSource.json",
+  "AUTH_JWKS": "/jwk/mock-jwks.json",
+  "LIVE_ORDER_SUBMIT": "/live/orderSubmit.json",
+  "LIVE_ORDER_STATUS": "/live/orderStatus.json",
+  "LIVE_ORDER_ASYNC_TRACE": "/live/orderAsyncTrace.json",
+  "LIVE_CUSTOMER_PROFILE": "/live/customerProfile.json",
+  "LOAN_CREDIT_RATING": "/loan/creditRating.json",
+  "LOAN_FRAUD_CHECK": "/loan/fraudCheck.json",
+  "LOAN_DEBT_SUMMARY": "/loan/debtSummary.json",
+  "LOAN_APPLICATION_SUBMIT": "/loan/applicationSubmit.json"
 }

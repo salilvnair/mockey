@@ -1,0 +1,7 @@
+{
+  "status": "SUBMITTED",
+  "orderId": "ORD-PLACEHOLDER",
+  "api3Status": "SUCCESS",
+  "api4AsyncStatus": null,
+  "message": "Order is submitted and waiting for async callback"
+}

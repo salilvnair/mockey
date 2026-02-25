@@ -1,0 +1,7 @@
+{
+  "responseDelayInMillis": 1200,
+  "customerId": "CUST-1001",
+  "flagged": false,
+  "riskLevel": "LOW",
+  "source": "CreditCardFraudWatchMock"
+}

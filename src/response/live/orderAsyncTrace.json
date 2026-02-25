@@ -1,0 +1,7 @@
+{
+  "traceId": "TRACE-PLACEHOLDER",
+  "orderId": "ORD-PLACEHOLDER",
+  "api4AsyncStatus": null,
+  "callbackReceivedAt": null,
+  "message": "Async callback not yet received"
+}

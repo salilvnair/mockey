@@ -1,0 +1,8 @@
+{
+  "responseDelayInMillis": 1500,
+  "customerId": "CUST-1001",
+  "monthlyDebt": 28000,
+  "monthlyIncome": 125000,
+  "dti": 0.22,
+  "availableCredit": 420000
+}

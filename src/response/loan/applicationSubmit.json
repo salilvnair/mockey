@@ -1,0 +1,8 @@
+{
+  "responseDelayInMillis": 1800,
+  "customerId": "CUST-1001",
+  "applicationId": "APP-000000",
+  "status": "SUBMITTED",
+  "requestedAmount": 350000,
+  "tenureMonths": 36
+}
